@@ -2,13 +2,33 @@
   "name": "simple-datastore-client",
   "version": "0.0.1",
   "description": "Simple client for a simple datastore",
-  "main": "client.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "devDependencies": {
+    "@types/node": "^24.10.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
     "vite": "^6.4.1",
     "vitest": "^4.0.8"
   },
   "scripts": {
-    "test": "vitest"
+    "build": "tsup src/index.ts --format esm,cjs --dts --sourcemap --platform neutral --clean",
+    "test": "vitest",
+    "prepack": "npm run build",
+    "pack": "npm pack"
   },
   "author": "",
   "license": "ISC"
