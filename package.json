@@ -1,0 +1,15 @@
+{
+  "name": "simple-datastore-client",
+  "version": "0.0.1",
+  "description": "Simple client for a simple datastore",
+  "main": "client.js",
+  "devDependencies": {
+    "vite": "^6.4.1",
+    "vitest": "^4.0.8"
+  },
+  "scripts": {
+    "test": "vitest"
+  },
+  "author": "",
+  "license": "ISC"
+}
