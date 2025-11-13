@@ -19,6 +19,7 @@ export interface PullOptions {
 export interface Acknowledgement {
   id: string | null;
   success: boolean;
+  lastChange: number | null;
   error: string | null;
 }
 
@@ -163,9 +164,11 @@ export class SimpleDatastoreClient {
             `Unexpected frame while waiting for OK: ${JSON.stringify(ack)}`
           );
         }
+        const cursor = typeof ack[2] === 'number' ? ack[2] : null;
         acknowledgements.push({
           id: (ack[1] as string) ?? null,
-          success: Boolean(ack[2]),
+          success: cursor !== null,
+          lastChange: cursor,
           error: (ack[3] as string) ?? null,
         });
       }

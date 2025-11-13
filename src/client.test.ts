@@ -92,7 +92,8 @@ describe('SimpleDatastoreClient', () => {
         const frame = JSON.parse(raw)
         seenFrames.push(frame)
         const [, entityId] = frame
-        sendServerMessage(['OK', entityId, true, null])
+        const cursor = entityId === 'alpha' ? 1700000002 : 1700000003
+        sendServerMessage(['OK', entityId, cursor, null])
       })
     })
 
@@ -112,8 +113,8 @@ describe('SimpleDatastoreClient', () => {
       ['EVENT', 'beta', { content: 'second' }]
     ])
     expect(acknowledgements).toEqual([
-      { id: 'alpha', success: true, error: null },
-      { id: 'beta', success: true, error: null }
+      { id: 'alpha', success: true, lastChange: 1700000002, error: null },
+      { id: 'beta', success: true, lastChange: 1700000003, error: null }
     ])
   })
 
@@ -125,7 +126,8 @@ describe('SimpleDatastoreClient', () => {
       ])
       interceptClientMessage((raw) => {
         const [, entityId] = JSON.parse(raw)
-        sendServerMessage(['OK', entityId, entityId === 'new', null])
+        const payload = entityId === 'new' ? 11 : false
+        sendServerMessage(['OK', entityId, payload, null])
       })
     })
 
@@ -145,8 +147,8 @@ describe('SimpleDatastoreClient', () => {
 
     expect(result).toEqual([{ id: 'seed', content: 'existing', last_change: 10 }])
     expect(acknowledgements).toEqual([
-      { id: 'new', success: true, error: null },
-      { id: 'old', success: false, error: null }
+      { id: 'new', success: true, lastChange: 11, error: null },
+      { id: 'old', success: false, lastChange: null, error: null }
     ])
   })
 })
