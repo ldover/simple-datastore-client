@@ -1,16 +1,16 @@
 {
   "name": "simple-datastore-client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple client for a simple datastore",
   "author": "Luka Dover <luka.dover@gmail.com>",
   "license": "UNLICENSED",
   "publishConfig": {
-		"access": "public"
-	},
+    "access": "public"
+  },
   "repository": {
-		"type": "git",
-		"url": "git+https://github.com/ldover/simple-datastore-client.git"
-	},
+    "type": "git",
+    "url": "git+https://github.com/ldover/simple-datastore-client.git"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
