@@ -1,6 +1,6 @@
 {
   "name": "simple-datastore-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple client for a simple datastore",
   "author": "Luka Dover <luka.dover@gmail.com>",
   "license": "UNLICENSED",
